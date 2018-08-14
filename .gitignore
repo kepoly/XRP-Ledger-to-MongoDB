@@ -11,3 +11,5 @@ watch.sh
 /server/run.log
 /server/dev.js
 /cleanup.sh
+.idea/
+idea/
