@@ -28,18 +28,18 @@ var lastMarker = '';
 var filename = 'account_data.json';
 const type = 'account';
 
-var transformStream = JSONStream.stringify('[', ', ', ']'); // '[\n', ',\n', '\n]\n' // false
-var outputStream = fileSystem.createWriteStream(__dirname + "/" + filename);
-transformStream.pipe(outputStream);
-outputStream.on(
-    "finish",
-    function handleFinish() {
-        console.log('Done! wrote records:', records);
-        fileSystem.copyFileSync(__dirname + "/" + filename, "/var/www/html/download/" + (new Date().toISOString().replace(/[:-]/g, '').replace(/\..+/, '')) + "." + filename);
-        mongo.close();
-        process.exit(0);
-    }
-);
+// var transformStream = JSONStream.stringify('[', ', ', ']'); // '[\n', ',\n', '\n]\n' // false
+// var outputStream = fileSystem.createWriteStream(__dirname + "/" + filename);
+// transformStream.pipe(outputStream);
+// outputStream.on(
+//     "finish",
+//     function handleFinish() {
+//         console.log('Done! wrote records:', records);
+//         fileSystem.copyFileSync(__dirname + "/" + filename, "/var/www/html/download/" + (new Date().toISOString().replace(/[:-]/g, '').replace(/\..+/, '')) + "." + filename);
+//         mongo.close();
+//         process.exit(0);
+//     }
+// );
 
 function send(r) {
     calls++;
@@ -73,7 +73,7 @@ ws.on('message', function incoming(data) {
         if (r.status && r.status === 'success' && r.type && r.type === 'response') {
             if (r.result.state !== null) {
                 r.result.state.forEach((i) => {
-                    transformStream.write(i);
+                    //transformStream.write(i);
                     collection.findAndModify({
                         Account: i.Account
                     }, [
@@ -108,7 +108,7 @@ ws.on('message', function incoming(data) {
                 console.log('Done! Finishing write...');
                 console.log('');
 
-                transformStream.end();
+                //transformStream.end();
             } else {
                 // Continue
                 req.marker = r.result.marker;
