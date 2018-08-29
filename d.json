@@ -1,0 +1,53 @@
+{
+  "result": {
+    "info": {
+      "build_version": "4.0.2",
+      "closed_ledger": {
+        "age": 24,
+        "base_fee_csc": 0.01,
+        "hash": "C999789344DE7E5A96533DAAFC7EB04B1727B2D79C9DB318F611CFA5D1FF902F",
+        "reserve_base_csc": 10,
+        "reserve_inc_csc": 5,
+        "seq": 2
+      },
+      "complete_ledgers": "empty",
+      "hostid": "TREK",
+      "io_latency_ms": 1,
+      "last_close": {
+        "converge_time_s": 300,
+        "proposers": 0
+      },
+      "load_factor": 1,
+      "peers": 10,
+      "pubkey_node": "n9JgmEcP2DHYJLDArzPzt6wg8hQjEqWmvL4u8jxae9QhdAdQmsLX",
+      "published_ledger": "none",
+      "server_state": "connected",
+      "state_accounting": {
+        "connected": {
+          "duration_us": "10312046",
+          "transitions": 1
+        },
+        "disconnected": {
+          "duration_us": "1179437",
+          "transitions": 1
+        },
+        "full": {
+          "duration_us": "0",
+          "transitions": 0
+        },
+        "syncing": {
+          "duration_us": "0",
+          "transitions": 0
+        },
+        "tracking": {
+          "duration_us": "0",
+          "transitions": 0
+        }
+      },
+      "uptime": 12,
+      "validation_quorum": 12
+    }
+  },
+  "status": "success",
+  "type": "response"
+}

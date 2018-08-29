@@ -13,7 +13,7 @@ setTimeout(function () {
 var db = null;
 var mongo = null;
 var collection = null;
-MongoClient.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true }, function (err, client) {
+MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true }, function (err, client) {
     mongo = client;
     console.log('Connected to MongoDB');
     db = client.db('casinocoin');
@@ -64,7 +64,8 @@ ws.on('message', function incoming(data) {
     console.log(data);
 
     if (ledger === null) {
-        ledger = r.result.info.validated_ledger;
+        //ledger = r.result.info.validated_ledger;
+        ledger = r.result.info.closed_ledger;
         console.log(ledger);
         req.ledger = ledger.hash;
         console.log('Starting for ledger', ledger.seq, ledger.hash);
