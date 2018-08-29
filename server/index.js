@@ -1,7 +1,7 @@
 const fileSystem = require('fs');
 const JSONStream = require('JSONStream');
 const WebSocket = require('ws');
-const ws = new WebSocket('ws://127.0.0.1');
+const ws = new WebSocket('ws://167.99.229.4:4443'); //Public casinocoind server hosted by CasinoCoin, Inc.
 const MongoClient = require('mongodb').MongoClient;
 const express = require('express');
 const fetch = require('node-fetch');
@@ -57,7 +57,7 @@ var collection = null;
 
 var router = express.Router();
 router.get('/', function (req, res) {
-    res.json({message: 'Hooray! welcome to our API!'});
+    res.json({message: 'Hi smart man'});
 });
 
 app.use('/api', router);
@@ -326,7 +326,7 @@ router.route('/richlist').get(function (req, res) {
     };
 
     requested++;
-    collection.count({}, function (error, numOfDocs) {
+    collection.countDocuments({}, function (error, numOfDocs) {
         responded++;
         response.accounts = numOfDocs;
 
@@ -377,10 +377,13 @@ router.route('/richlist').get(function (req, res) {
                 }
             ]).toArray(function (error, d) {
                 responded++;
-                response.has[f] = {
-                    accounts: d[0].count,
-                    balanceSum: d[0].balanceSum,
-                };
+                console.log(d);
+                if (d[0]) {
+                    response.has[f] = {
+                        accounts: d[0].count,
+                        balanceSum: d[0].balanceSum,
+                    };
+                }
                 sendResponse();
             });
             lastMax = amount;
@@ -421,7 +424,7 @@ router.route('/richlist-index/:account/:ignoregt?').get(function (req, res) {
     }, max_processing_seconds * 1000);
 
     var countQuery = {};
-    collection.count(countQuery, function (error, numOfDocs) {
+    collection.countDocuments(countQuery, function (error, numOfDocs) {
         response.numAccounts = numOfDocs;
         collection.find({Account: {$in: req.params.account.replace(/[^a-zA-Z0-9]+/g, ' ').trim().split(' ')}}).project({
             Account: true,
@@ -493,10 +496,10 @@ router.route('/richlist-index/:account/:ignoregt?').get(function (req, res) {
     })
 });
 
-MongoClient.connect('mongodb://127.0.0.1:27017', function (err, client) {
+MongoClient.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true }, function (err, client) {
     mongo = client;
     console.log('Connected to MongoDB');
-    db = client.db('ripple');
+    db = client.db('casinocoin');
     collection = db.collection('account');
 
     app.listen(port);

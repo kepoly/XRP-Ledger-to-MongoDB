@@ -1,7 +1,7 @@
 const fileSystem = require('fs');
 const JSONStream = require('JSONStream');
 const WebSocket = require('ws');
-const ws = new WebSocket('wss://ws01.casinocoin.org'); //Public casinocoind server hosted by CasinoCoin, Inc.
+const ws = new WebSocket('ws://167.99.229.4:4443'); //Public casinocoind server hosted by CasinoCoin, Inc.
 //const ws = new WebSocket('ws://127.0.0.1');
 const MongoClient = require('mongodb').MongoClient;
 
@@ -13,7 +13,7 @@ setTimeout(function () {
 var db = null;
 var mongo = null;
 var collection = null;
-MongoClient.connect('mongodb://127.0.0.1:27017', function (err, client) {
+MongoClient.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true }, function (err, client) {
     mongo = client;
     console.log('Connected to MongoDB');
     db = client.db('casinocoin');
